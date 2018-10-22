@@ -117,7 +117,7 @@ public class NoticeDAO {
 		NoticeDTO nd =null;
 		
 		while(rs.next()) {
-			 nd  =new NoticeDTO();
+			nd  =new NoticeDTO();
 			nd.setNum(rs.getInt("num"));
 			nd.setTitle(rs.getString("title"));
 			
