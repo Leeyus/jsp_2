@@ -9,7 +9,21 @@ import com.iu.util.DBConnector;
 
 public class NoticeDAO {
 	
-	public void noticeUpdate()throws Exception {
+	//get count
+	public int getCount() throws Exception  {
+		Connection con = DBConnector.getConnect();
+		String sql = "select count(num) from notice";
+		
+		PreparedStatement st = con.prepareStatement(sql);
+		ResultSet rs = st.executeQuery();
+		rs.next();
+		int result = rs.getInt(1);
+		
+		DBConnector.disConnect(rs, st, con);
+		return result;
+	}
+	public void noticeUpdate() throws Exception {
+		
 		Connection con= DBConnector.getConnect();
 		String sql = "update notice set ";
 		
@@ -26,11 +40,24 @@ public class NoticeDAO {
 		DBConnector.disConnect(st, con);
 		return result;
 	}
-	public static void main(String[] args) {
-		int [] nums = new int[3];
+	public static void main(String[] args) throws Exception{
+		NoticeDAO noticeDAO = new NoticeDAO();
+		
+		for(int i =0;i<150;i++) {
+			NoticeDTO noticeDTO=new NoticeDTO();
+			noticeDTO.setTitle("title"+i);
+			noticeDTO.setContents("contents"+i);
+			noticeDTO.setWriter("writer"+i);
+			noticeDAO.noticeWriteForm(noticeDTO);
+			if(i%10==0) {
+				Thread.sleep(500);
+			}
+		}
+		System.out.println("Done");
+		/*int [] nums = new int[3];
 		for(int n : nums) {
 			System.out.println(n);//또다른 for문
-		}
+		}*/
 	}
 	
 	//insert
@@ -70,21 +97,27 @@ public class NoticeDAO {
 		}
 	
 	
-	public ArrayList<NoticeDTO> noticeList() throws Exception{
+	public ArrayList<NoticeDTO> noticeList(int StartRow, int lastRow) throws Exception{
 		Connection con = DBConnector.getConnect();
-		String sql = "select * from notice order by num desc";
+		String sql = "select * from "
+				+ "(select rownum R, N.* from "
+				+ "(select num, title,writer,reg_date, hit from notice order by num desc) N) "
+				+ "where R between ? and ?";
 		PreparedStatement st = con.prepareStatement(sql);
+		st.setInt(1, StartRow);
+		st.setInt(2, lastRow);
 		ResultSet rs = st.executeQuery();
 		ArrayList<NoticeDTO>noticeDTO = new ArrayList<>();
+		NoticeDTO nd =null;
 		
 		while(rs.next()) {
-			NoticeDTO nd  =new NoticeDTO();
-			nd.setNum(rs.getInt(1));
-			nd.setTitle(rs.getString(2));
-			nd.setContents(rs.getString(3));
-			nd.setWriter(rs.getString(4));
-			nd.setReg_date(rs.getDate(5));
-			nd.setHit(rs.getInt(6));
+			 nd  =new NoticeDTO();
+			nd.setNum(rs.getInt("num"));
+			nd.setTitle(rs.getString("title"));
+			
+			nd.setWriter(rs.getString("writer"));
+			nd.setReg_date(rs.getDate("reg_date"));
+			nd.setHit(rs.getInt("hit"));
 			noticeDTO.add(nd);
 		}
 		DBConnector.disConnect(rs, st, con);

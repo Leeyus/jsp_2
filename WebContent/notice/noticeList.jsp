@@ -1,3 +1,4 @@
+<%@page import="com.sun.scenario.effect.impl.prism.PrTexture"%>
 <%@page import="com.iu.notice.NoticeDTO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.iu.notice.NoticeDAO"%>
@@ -220,7 +221,46 @@
 </nav>
 <%
 	NoticeDAO no = new NoticeDAO();
-	ArrayList<NoticeDTO> noticeDTO=no.noticeList();
+	
+	int curPage=1;
+	try{
+		curPage=Integer.parseInt (request.getParameter("curPage"));
+	}catch(Exception e){
+		
+	}
+	int perPage=10;
+	int startRow=(curPage-1)*perPage+1;
+	int lastRow=curPage*perPage;
+	ArrayList<NoticeDTO> noticeDTO=no.noticeList(startRow,lastRow);
+	
+	//페이징
+	//1. 전체글 글의 갯수
+	int totalCount = no.getCount();
+	//2. 전체 페이지의 갯수
+	int totalPage = totalCount/perPage;
+	if(totalCount%10 != 0){
+		totalPage = totalCount/perPage+1;
+	}
+	//3. 전체 블럭의 갯수
+	int perBlock=5;//블럭당 숫자의 갯수
+	int totalBlock = totalPage/perBlock;
+		if(totalPage%perBlock !=0 ){
+			//totalBlock = totalPage/perBlock+1;
+			totalBlock = totalBlock+1;
+		}
+	//4.curPage 의 번호로 curBlock구하기
+	int curBlock = curPage/perBlock;
+	if(curPage%perBlock !=0){
+		curBlock = curPage/perBlock+1;
+	}
+	//5. curBlock 번호로 startNum, lastNum 구하기
+	int startNum=(curBlock-1)*perBlock+1;
+	int lastNum=curBlock*perBlock;
+	
+	if(curBlock == totalBlock){
+		lastNum =totalPage;
+	}
+	
 %>
 <div class="container-fluid">
 		<div class="row">
@@ -236,12 +276,35 @@
 			</tr>
 			<%} %>
 			</table>
+			
+		</div>
+		<div class="container-fluid">
+		<div class="row">
+			 
+			<ul class="pagination">
+			<li><a href="./noticeList.jsp?curPage=<%= 1%>"><span class="glyphicon glyphicon-backward"></span></a></li>
+			<% if(curBlock>1){ %>
+    			<li><a href="./noticeList.jsp?curPage=<%= startNum-1%>"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
+    		<%} %>	
+				<%for(int i=startNum;i<=lastNum;i++){ %>
+					<li><a href="./noticeList.jsp?curPage=<%=i%>"><%=i%></a></li>
+				<%} %>
+			<%if(curBlock!=totalBlock){ %>	
+				<li><a href="./noticeList.jsp?curPage=<%=lastNum+1%>"><span class="glyphicon glyphicon-chevron-right"></span></a></li>
+			<%} %>	
+			<li><a href="./noticeList.jsp?curPage=<%=totalPage%>"><span class="glyphicon glyphicon-forward"></span></a></li>
+			</ul>
+    		
+    			
+		</div >
+		</div>
+		<div class="container-fluid">
+			<div class="row">
 			<div class="col-md-1">
 			<a href="noticeWriteForm.jsp" class="btn btn-warning">작성</a>
 			</div>
-		
+			</div>
 		</div>
-	
 
 </div>
 
