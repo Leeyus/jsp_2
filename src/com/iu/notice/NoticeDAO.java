@@ -28,15 +28,15 @@ public class NoticeDAO {
 	}
 	
 	
-	
+	//insert
 	public int noticeWriteForm(NoticeDTO noticeDTO) throws Exception{
 		Connection con = DBConnector.getConnect();
-		String sql = "insert into notice values(notice_seq.nextval,?,?,?,sysdate,?)";
+		String sql = "insert into notice values(notice_seq.nextval,?,?,?,sysdate,0)";
 		PreparedStatement st = con.prepareStatement(sql);
 		st.setString(1, noticeDTO.getTitle());
 		st.setString(2, noticeDTO.getContents());
 		st.setString(3, noticeDTO.getWriter());
-		st.setInt(4, noticeDTO.getHit());
+		
 		
 		int result = st.executeUpdate();
 		
@@ -50,19 +50,19 @@ public class NoticeDAO {
 			String sql = "select * from notice where num=?";
 			PreparedStatement st = con.prepareStatement(sql);
 			st.setInt(1, num);
+			NoticeDTO noticeDTO= null;
 			ResultSet rs = st.executeQuery();
-			NoticeDTO noticeDTO= new NoticeDTO();
-			rs.next();
+			if(rs.next()) {
+				noticeDTO=new NoticeDTO();
 			noticeDTO.setNum(rs.getInt(1));
 			noticeDTO.setTitle(rs.getString(2));
 			noticeDTO.setContents(rs.getString(3));
 			noticeDTO.setWriter(rs.getString(4));
 			noticeDTO.setReg_date(rs.getDate(5));
 			noticeDTO.setHit(rs.getInt(6));
+			}
 			DBConnector.disConnect(rs, st, con);
 			return noticeDTO;
-			
-			
 		}
 	
 	
