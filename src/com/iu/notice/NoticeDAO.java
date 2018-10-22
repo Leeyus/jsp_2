@@ -13,7 +13,7 @@ public class NoticeDAO {
 	public int getCount(String kind, String search) throws Exception  {
 		Connection con = DBConnector.getConnect();
 		String sql = "select count(num) from notice "
-				+ "where"+kind+" like ?";
+				+ "where "+kind+" like ?";
 		
 		PreparedStatement st = con.prepareStatement(sql);
 		st.setString(1, "%"+search+"%");
