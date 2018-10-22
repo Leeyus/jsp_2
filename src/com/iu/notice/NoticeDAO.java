@@ -26,7 +26,12 @@ public class NoticeDAO {
 		DBConnector.disConnect(st, con);
 		return result;
 	}
-	
+	public static void main(String[] args) {
+		int [] nums = new int[3];
+		for(int n : nums) {
+			System.out.println(n);//또다른 for문
+		}
+	}
 	
 	//insert
 	public int noticeWriteForm(NoticeDTO noticeDTO) throws Exception{
@@ -36,7 +41,6 @@ public class NoticeDAO {
 		st.setString(1, noticeDTO.getTitle());
 		st.setString(2, noticeDTO.getContents());
 		st.setString(3, noticeDTO.getWriter());
-		
 		
 		int result = st.executeUpdate();
 		

@@ -7,9 +7,9 @@
     NoticeDTO noticeDTO = new NoticeDTO();
     String n = "Fill";
     noticeDTO.setTitle(request.getParameter("title"));
-    noticeDTO.setContents(request.getParameter("contents"));
     noticeDTO.setWriter(request.getParameter("writer"));
-    noticeDTO.setHit(Integer.parseInt(request.getParameter("hit")));
+    noticeDTO.setContents(request.getParameter("contents"));
+    
     int result = no.noticeWriteForm(noticeDTO);
     
     if(result>0){

@@ -223,19 +223,25 @@
 	ArrayList<NoticeDTO> noticeDTO=no.noticeList();
 %>
 <div class="container-fluid">
-	<table class="table table-striped">
-		<tr><td>num</td><td>title</td><td>writer</td><td>reg_date</td><td>hit</td></tr>
-		<%for(int a =0; a<noticeDTO.size();a++){ %>
-		<tr>
-			<td><%=noticeDTO.get(a).getNum() %></td>
-			<td><a href="noticeSelectOne.jsp?num=<%=noticeDTO.get(a).getNum() %>"><%=noticeDTO.get(a).getTitle() %></a></td>
-			<td><%=noticeDTO.get(a).getWriter() %></td>
-			<td><%=noticeDTO.get(a).getReg_date() %></td>
-			<td><%=noticeDTO.get(a).getHit() %></td>
-		</tr>
-		<%} %>
-	</table>
-	<a href="noticeWriteForm.jsp" class="btn btn-warning">작성</a>
+		<div class="row">
+			<table class="table table-striped">
+			<tr><td>Num</td><td>Title</td><td>Writer</td><td>Date</td><td>Hit</td></tr>
+			<%for(NoticeDTO noticeDTO2 : noticeDTO){ %>
+			<tr>
+			<td><%=noticeDTO2.getNum()%></td>
+			<td><a href="noticeSelectOne.jsp?num=<%=noticeDTO2.getNum() %>"><%=noticeDTO2.getTitle() %></a></td>
+			<td><%=noticeDTO2.getWriter() %></td>
+			<td><%=noticeDTO2.getReg_date() %></td>
+			<td><%=noticeDTO2.getHit() %></td>
+			</tr>
+			<%} %>
+			</table>
+			<div class="col-md-1">
+			<a href="noticeWriteForm.jsp" class="btn btn-warning">작성</a>
+			</div>
+		
+		</div>
+	
 
 </div>
 
