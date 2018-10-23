@@ -238,7 +238,7 @@
 	int totalCount = no.getCount();
 	//2. 전체 페이지의 갯수
 	int totalPage = totalCount/perPage;
-	if(totalCount%10 != 0){
+	if(totalCount%perPage != 0){
 		totalPage = totalCount/perPage+1;
 	}
 	//3. 전체 블럭의 갯수
