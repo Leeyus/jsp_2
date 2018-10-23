@@ -18,9 +18,10 @@
     request.setAttribute("message", n);
     request.setAttribute("path", "./noticeList.jsp?surPage=1");
     
-    RequestDispatcher view = request.getRequestDispatcher("../common/result.jsp");
-    view.forward(request, response);
-    
+   /*  RequestDispatcher view = request.getRequestDispatcher("../common/result.jsp");
+    view.forward(request, response); */
+    //redirect
+    response.sendRedirect("../index.jsp");//이동 해야할 주소
     %>
 <!DOCTYPE html>
 <html>
