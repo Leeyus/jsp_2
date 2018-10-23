@@ -242,7 +242,7 @@
 	int perPage=10;
 	int startRow=(curPage-1)*perPage+1;
 	int lastRow=curPage*perPage;
-	ArrayList<NoticeDTO> noticeDTO=no.noticeList(startRow,lastRow,kind,search);
+	ArrayList<NoticeDTO> noticeDTO=no.noticeList(startRow, lastRow, kind, search);
 	
 	//페이징
 	//1. 전체글 글의 갯수
