@@ -54,6 +54,7 @@ public class MemberDAO {
 		return ar;
 	}
 	
+	//리스트 만들기와 번호
 	public int getCount(String kind, String search) throws Exception{
 		Connection con = DBConnector.getConnect();
 		String sql ="select count(id) from member "
