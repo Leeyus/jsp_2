@@ -20,6 +20,7 @@
     
    /*  RequestDispatcher view = request.getRequestDispatcher("../common/result.jsp");
     view.forward(request, response); */
+    
     //redirect
     response.sendRedirect("../index.jsp");//이동 해야할 주소
     %>

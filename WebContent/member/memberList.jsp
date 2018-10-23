@@ -268,8 +268,8 @@
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="./notice/noticeList.jsp">NOTICE</a></li>
-        <li><a href="#services">SERVICES</a></li>
+        <li><a href="../notice/noticeList.jsp">NOTICE</a></li>
+        <li><a href="./member/memberList.jsp">MEMBER</a></li>
         <li><a href="#portfolio">PORTFOLIO</a></li>
         <li><a href="#pricing">PRICING</a></li>
         <li><a href="#contact">CONTACT</a></li>
@@ -281,7 +281,7 @@
 <div class="container-fluid">
 		<div class="row">
 			<div>
-				<form class="form-inline" action="./membeList.jsp">
+				<form class="form-inline" action="./memberList.jsp">
 					<div class="form-group">
 					<select class="form-control" id="sel1" name="kind">
 				        <option>ID</option>
@@ -317,15 +317,15 @@
 			<ul class="pagination">
 			<li><a href="./memberList.jsp?curPage=<%= 1%>&kind=<%=kind%>&search=<%=search%>"><span class="glyphicon glyphicon-backward"></span></a></li>
 			<% if(curBlock>1){ %>
-    			<li><a href="./membeList.jsp?curPage=<%= startNum-1%>"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
+    			<li><a href="./memberList.jsp?curPage=<%= startNum-1%>"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
     		<%} %>	
 				<%for(int i=startNum;i<=lastNum;i++){ %>
-					<li><a href="./membeList.jsp?curPage=<%=i%>&kind=<%=kind%>&search=<%=search%>"><%=i%></a></li>
+					<li><a href="./memberList.jsp?curPage=<%=i%>&kind=<%=kind%>&search=<%=search%>"><%=i%></a></li>
 				<%} %>
 			<%if(curBlock!=totalBlock){ %>	
-				<li><a href="./membeList.jsp?curPage=<%=lastNum+1%>"><span class="glyphicon glyphicon-chevron-right"></span></a></li>
+				<li><a href="./memberList.jsp?curPage=<%=lastNum+1%>"><span class="glyphicon glyphicon-chevron-right"></span></a></li>
 			<%} %>	
-			<li><a href="./membeList.jsp?curPage=<%=totalPage%>&kind=<%=kind%>&search=<%=search%>"><span class="glyphicon glyphicon-forward"></span></a></li>
+			<li><a href="./memberList.jsp?curPage=<%=totalPage%>&kind=<%=kind%>&search=<%=search%>"><span class="glyphicon glyphicon-forward"></span></a></li>
 			</ul>
     		
     			

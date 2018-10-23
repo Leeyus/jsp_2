@@ -22,6 +22,7 @@
     request.setAttribute("message", s);
     request.setAttribute("path", "../index.jsp");
     
+    //Foward
     //이동해야할페이지의 주소
    	RequestDispatcher view = request.getRequestDispatcher("../common/result.jsp");
     view.forward(request, response);
