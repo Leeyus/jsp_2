@@ -1,4 +1,3 @@
-<%@page import="com.sun.scenario.effect.impl.prism.PrTexture"%>
 <%@page import="com.iu.notice.NoticeDTO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.iu.notice.NoticeDAO"%>
@@ -219,92 +218,52 @@
     </div>
   </div>
 </nav>
-<%
-	NoticeDAO no = new NoticeDAO();
-	
-	int curPage=1;
-	try{
-		curPage=Integer.parseInt (request.getParameter("curPage"));
-	}catch(Exception e){
-		
-	}
-	int perPage=10;
-	int startRow=(curPage-1)*perPage+1;
-	int lastRow=curPage*perPage;
-	ArrayList<NoticeDTO> noticeDTO=no.noticeList(startRow,lastRow);
-	
-	//페이징
-	//1. 전체글 글의 갯수
-	int totalCount = no.getCount();
-	//2. 전체 페이지의 갯수
-	int totalPage = totalCount/perPage;
-	if(totalCount%perPage != 0){
-		totalPage = totalCount/perPage+1;
-	}
-	//3. 전체 블럭의 갯수
-	int perBlock=5;//블럭당 숫자의 갯수
-	int totalBlock = totalPage/perBlock;
-		if(totalPage%perBlock !=0 ){
-			//totalBlock = totalPage/perBlock+1;
-			totalBlock = totalBlock+1;
-		}
-	//4.curPage 의 번호로 curBlock구하기
-	int curBlock = curPage/perBlock;
-	if(curPage%perBlock !=0){
-		curBlock = curPage/perBlock+1;
-	}
-	//5. curBlock 번호로 startNum, lastNum 구하기
-	int startNum=(curBlock-1)*perBlock+1;
-	int lastNum=curBlock*perBlock;
-	
-	if(curBlock == totalBlock){
-		lastNum =totalPage;
-	}
-	
-%>
+
 <div class="container-fluid">
 		<div class="row">
-			<table class="table table-striped">
-			<tr><td>Num</td><td>Title</td><td>Writer</td><td>Date</td><td>Hit</td></tr>
-			<%for(NoticeDTO noticeDTO2 : noticeDTO){ %>
-			<tr>
-			<td><%=noticeDTO2.getNum()%></td>
-			<td><a href="noticeSelectOne.jsp?num=<%=noticeDTO2.getNum() %>"><%=noticeDTO2.getTitle() %></a></td>
-			<td><%=noticeDTO2.getWriter() %></td>
-			<td><%=noticeDTO2.getReg_date() %></td>
-			<td><%=noticeDTO2.getHit() %></td>
-			</tr>
-			<%} %>
-			</table>
-			
-		</div>
-		<div class="container-fluid">
-		<div class="row">
-			 
-			<ul class="pagination">
-			<li><a href="./noticeList.jsp?curPage=<%= 1%>"><span class="glyphicon glyphicon-backward"></span></a></li>
-			<% if(curBlock>1){ %>
-    			<li><a href="./noticeList.jsp?curPage=<%= startNum-1%>"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
-    		<%} %>	
-				<%for(int i=startNum;i<=lastNum;i++){ %>
-					<li><a href="./noticeList.jsp?curPage=<%=i%>"><%=i%></a></li>
-				<%} %>
-			<%if(curBlock!=totalBlock){ %>	
-				<li><a href="./noticeList.jsp?curPage=<%=lastNum+1%>"><span class="glyphicon glyphicon-chevron-right"></span></a></li>
-			<%} %>	
-			<li><a href="./noticeList.jsp?curPage=<%=totalPage%>"><span class="glyphicon glyphicon-forward"></span></a></li>
-			</ul>
-		</div >
-		
-		
-		
-		</div>
-		<div class="container-fluid">
-			<div class="row">
-			<div class="col-md-1">
-			<a href="noticeWriteForm.jsp" class="btn btn-warning">작성</a>
-			</div>
-			</div>
+			<form action="./memberJoineProcess.jsp" method="post">
+				<div class="form-group">
+					<label for="id">ID:</label> <input type="text"
+						class="form-control" id="id" placeholder="Enter id"
+						name="id">
+						<input type="button" id ="btn" class="btn btn-danger" value="중복확인">
+				</div>
+				<div class="form-group">
+					<label for="pw">PW:</label> <input type="password"
+						class="form-control" id="pw" placeholder="Enter pw">
+				</div>
+				<div class="form-group">
+					<label for="pw">PW:</label> <input type="password"
+						class="form-control" id="pw2" placeholder="Enter pw"
+						name="pw">
+				</div>
+				<div class="form-group">
+					<label for="name">NAME:</label> <input type="text"
+						class="form-control" id="name" placeholder="Enter name"
+						name="name">
+				</div>
+				<div class="form-group">
+					<label for="email">email:</label> <input type="email"
+						class="form-control" id="email" placeholder="Enter email"
+						name="email">
+				</div>
+				<div class="form-group">
+					<label class="radio-inline"> <input type="radio"
+						name="kind" value="s" checked="checked">Student
+					</label> <label class="radio-inline"> <input type="radio"
+						name="kind" value="t">Teacher
+					</label>
+				</div>
+				
+				<div class="form-group">
+					<label for="classmate">ClassMate:</label> <input type="text"
+						class="form-control" id="classmate" placeholder="Enter classmate"
+						name="classmate">
+				</div>
+				
+				<button type="submit" class="btn btn-default">Writer</button>
+			</form>
+
 		</div>
 
 </div>

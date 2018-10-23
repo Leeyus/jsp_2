@@ -15,7 +15,11 @@
     if(result>0){
     	n= "success";
     }
+    request.setAttribute("message", n);
+    request.setAttribute("path", "./noticeList.jsp?surPage=1");
     
+    RequestDispatcher view = request.getRequestDispatcher("../common/result.jsp");
+    view.forward(request, response);
     
     %>
 <!DOCTYPE html>
@@ -23,11 +27,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript">
-	var c = '<%=n%>';
-	alert(c);
-	location.href="noticeList.jsp";
-</script>
+
 </head>
 <body>
 

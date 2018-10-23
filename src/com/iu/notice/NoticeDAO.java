@@ -22,6 +22,7 @@ public class NoticeDAO {
 		DBConnector.disConnect(rs, st, con);
 		return result;
 	}
+	
 	public void noticeUpdate() throws Exception {
 		
 		Connection con= DBConnector.getConnect();
@@ -97,14 +98,14 @@ public class NoticeDAO {
 		}
 	
 	
-	public ArrayList<NoticeDTO> noticeList(int StartRow, int lastRow) throws Exception{
+	public ArrayList<NoticeDTO> noticeList(int startRow, int lastRow) throws Exception{
 		Connection con = DBConnector.getConnect();
 		String sql = "select * from "
 				+ "(select rownum R, N.* from "
 				+ "(select num, title,writer,reg_date, hit from notice order by num desc) N) "
 				+ "where R between ? and ?";
 		PreparedStatement st = con.prepareStatement(sql);
-		st.setInt(1, StartRow);
+		st.setInt(1, startRow);
 		st.setInt(2, lastRow);
 		ResultSet rs = st.executeQuery();
 		ArrayList<NoticeDTO>noticeDTO = new ArrayList<>();
