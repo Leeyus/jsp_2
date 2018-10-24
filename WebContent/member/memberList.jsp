@@ -327,17 +327,31 @@
 			<%} %>	
 			<li><a href="./memberList.jsp?curPage=<%=totalPage%>&kind=<%=kind%>&search=<%=search%>"><span class="glyphicon glyphicon-forward"></span></a></li>
 			</ul>
-    		
-    			
 		</div >
+		<%
+			MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
+		%>
+		
+		<div class="row">
+		<%if(memberDTO!=null){ %>
+		<h3><%=memberDTO.getId() %>님 환영합니다!!</h3>
+			<a href="./memberLogOut.jsp">LogOut</a>
+			<a href="./memberMyPage.jsp">MyPage</a>
+		<%}else{ %>
+			<a href="./memberJoin.jsp">Join</a>
+			<a href="./memberLogin.jsp">Login</a>
+		<%} %>	
 		</div>
-<div class= "container-fluid">
+		
+		</div>
+		
+<!-- <div class= "container-fluid">
 	<div class="row">
 		<div class="col-md-1">
 			<a href="memberJoin.jsp" class="btn btn-warning">작성</a>
 		</div>
 	</div>
-</div>
+</div> -->
 
 
 </body>

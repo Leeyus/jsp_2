@@ -4,6 +4,9 @@
 <%@page import="com.iu.notice.NoticeDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    <% MemberDTO memberDTO = (MemberDTO)session.getAttribute("member"); %>
+    
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -219,32 +222,43 @@
     </div>
   </div>
 </nav>
-<% MemberDTO memberDTO = (MemberDTO)session.getAttribute("member"); %>
+
+
+<!-- pw, name, email -->
+<!-- memberUpdateProcess.jsp -->
+<!-- update 성공하면 memberList 자동이동(redirect) -->
+<!-- Update 실패시 Update Fail 출력 하고 memberList 자동 이동(foward) -->
+
 <div class="container-fluid">
 		<div class="row">
-			<form action="./noticeWriteProcess.jsp" method="post">
+			<form action="./memberUpdateProcess.jsp" method="post">
+				<input type = "hidden" value="<%=memberDTO.getId()%>" name="id">
 				<div class="form-group">
-					<label for="title">Title:</label> <input type="text"
-						class="form-control" id="title" placeholder="Enter Title"
-						name="title">
+					<label for="pw">PW:</label> <input type="password"
+						class="form-control" id="pw" placeholder="Enter pw">
 				</div>
 				<div class="form-group">
-					<label for="writer">Writer:</label> <input type="text"
-						class="form-control" id="writer" value="<%=memberDTO.getId()%>" placeholder="Enter writer"
-						name="writer"  readonly="readonly">
+					<label for="pw">PW:</label> <input type="password"
+						class="form-control" id="pw2" placeholder="Enter pw"
+						name="pw">
 				</div>
 				<div class="form-group">
-				<label for="contents">contents:</label>
-      			<textarea class="form-control" rows="20" id="contents" name="contents"></textarea>
-					
+					<label for="name">NAME:</label> <input type="text"
+						class="form-control" id="name" value="<%=memberDTO.getName() %>" placeholder="Enter name"
+						name="name">
+				</div>
+				<div class="form-group">
+					<label for="email">email:</label> <input type="email"
+						class="form-control" id="email" value="<%=memberDTO.getEmail() %>" placeholder="Enter email"
+						name="email">
 				</div>
 				
 				
-				<button type="submit" class="btn btn-default">Writer</button>
+				
+				<button type="submit" class="btn btn-default">Update</button>
 			</form>
 
 		</div>
-	
 
 </div>
 

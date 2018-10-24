@@ -1,9 +1,21 @@
-<%@page import="com.iu.member.MemberDTO"%>
 <%@page import="com.iu.notice.NoticeDTO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.iu.notice.NoticeDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    <%
+    	Cookie [] cookies = request.getCookies();
+    	String r = "";
+    	for(Cookie c: cookies){
+    		if(c.getName().equals("remember")){
+    			r = c.getValue();
+    			break;
+    		}
+    	}
+    	
+    %>
+    
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -219,32 +231,33 @@
     </div>
   </div>
 </nav>
-<% MemberDTO memberDTO = (MemberDTO)session.getAttribute("member"); %>
+
 <div class="container-fluid">
 		<div class="row">
-			<form action="./noticeWriteProcess.jsp" method="post">
+			<form action="./memberLoginProcess.jsp" method="post">
 				<div class="form-group">
-					<label for="title">Title:</label> <input type="text"
-						class="form-control" id="title" placeholder="Enter Title"
-						name="title">
-				</div>
-				<div class="form-group">
-					<label for="writer">Writer:</label> <input type="text"
-						class="form-control" id="writer" value="<%=memberDTO.getId()%>" placeholder="Enter writer"
-						name="writer"  readonly="readonly">
-				</div>
-				<div class="form-group">
-				<label for="contents">contents:</label>
-      			<textarea class="form-control" rows="20" id="contents" name="contents"></textarea>
-					
+					<label for="id">ID:</label> <input type="text"
+						value="<%= r %>" class="form-control" id="id" placeholder="Enter id"
+						name="id">
 				</div>
 				
+				<div class="form-group">
+					<label for="pw">PW:</label> <input type="password"
+						class="form-control" id="pw2" placeholder="Enter pw"
+						name="pw">
+				</div>
+				<div class="form-group">
+					<label class="radio-inline"> <input type="checkbox"
+						name="remember" value="T">ID기억하기
+					</label> 				
+					</div>
 				
-				<button type="submit" class="btn btn-default">Writer</button>
+				<button type="submit" class="btn btn-default">LOGIN</button>
 			</form>
+			
+			
 
 		</div>
-	
 
 </div>
 

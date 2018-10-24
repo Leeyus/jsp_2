@@ -11,6 +11,40 @@ import com.iu.util.DBConnector;
 import oracle.jdbc.proxy.annotation.Pre;
 
 public class MemberDAO {
+	
+	//Delete
+	public int delete(String id) throws Exception{
+		Connection con = DBConnector.getConnect();
+		String sql = "delete member where id=?";
+		PreparedStatement st = con.prepareStatement(sql);
+		st.setString(1, id);
+		int result = st.executeUpdate();
+		DBConnector.disConnect(st, con);
+		return result;
+		
+	}
+	
+	
+	
+	//Update
+	public int update(MemberDTO memberDTO) throws Exception {
+		Connection con = DBConnector.getConnect();
+		String sql = "update member set pw=?, name=?, email=? where id=?";
+		PreparedStatement st = con.prepareStatement(sql);
+		st.setString(1, memberDTO.getPw());
+		st.setString(2, memberDTO.getName());
+		st.setString(3, memberDTO.getEmail());
+		st.setString(4, memberDTO.getId());
+		
+		int result = st.executeUpdate();
+		DBConnector.disConnect(st, con);
+		return result;
+		
+		
+	}
+	
+	
+	
 	//insert
 	public int insert(MemberDTO memberDTO) throws Exception{
 		Connection con = DBConnector.getConnect();
@@ -27,6 +61,27 @@ public class MemberDAO {
 		return result;
 	}
 	
+	
+	//selectOne
+	public MemberDTO selectOne(MemberDTO memberDTO) throws Exception{
+		Connection con = DBConnector.getConnect();
+		String sql ="select * from member where id=? and pw=?";
+		PreparedStatement st = con.prepareStatement(sql);
+		st.setString(1, memberDTO.getId());
+		st.setString(2, memberDTO.getPw());
+		ResultSet rs = st.executeQuery();
+		MemberDTO mDTO = null;
+		if(rs.next()) {
+			mDTO=new MemberDTO();
+			mDTO.setId(rs.getString("id"));
+			mDTO.setName(rs.getString("name"));
+			mDTO.setEmail(rs.getString("email"));
+			mDTO.setKind(rs.getString("kind"));
+			mDTO.setClassMate(rs.getString("classmate"));
+		}
+		DBConnector.disConnect(rs, st, con);
+		return mDTO;
+	}
 	
 	
 	//MemberList
@@ -68,6 +123,6 @@ public class MemberDAO {
 		return result;
 	}
 	
-	//delete
+	
 
 }

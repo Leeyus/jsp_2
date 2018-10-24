@@ -249,9 +249,9 @@
 				</div>
 				<div class="form-group">
 					<label class="radio-inline"> <input type="radio"
-						name="kind" value="s" checked="checked">Student
+						name="kind" value="S" checked="checked">Student
 					</label> <label class="radio-inline"> <input type="radio"
-						name="kind" value="t">Teacher
+						name="kind" value="T">Teacher
 					</label>
 				</div>
 				

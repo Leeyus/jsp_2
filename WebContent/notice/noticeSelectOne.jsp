@@ -1,3 +1,4 @@
+<%@page import="com.iu.member.MemberDTO"%>
 <%@page import="com.iu.notice.NoticeDTO"%>
 <%@page import="com.iu.notice.NoticeDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -5,7 +6,8 @@
     <%	NoticeDAO no = new NoticeDAO();
     	int num = Integer.parseInt(request.getParameter("num"));
     	NoticeDTO noticeDTO=no.noticeSelectOne(num);
-    
+    	
+    	MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
     %>
 <!DOCTYPE html>
 <html>
@@ -35,7 +37,10 @@
 		</tr>	
 	</table>
 	<a href="noticeList.jsp" class="btn btn-warning">LIST</a>
+	<%if(memberDTO.getId().equals(noticeDTO.getWriter())){ %>
+	<a class="btn btn-warning">Update</a>
 	<a href="noticeDeleteProcess.jsp?num=<%= num %>" class="btn btn-warning">Delete</a>
+	<%} %>
 	</div>
 
 </body>

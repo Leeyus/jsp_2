@@ -1,3 +1,5 @@
+<%@page import="com.iu.member.MemberDAO"%>
+<%@page import="com.iu.member.MemberDTO"%>
 <%@page import="com.sun.scenario.effect.impl.prism.PrTexture"%>
 <%@page import="com.iu.notice.NoticeDTO"%>
 <%@page import="java.util.ArrayList"%>
@@ -326,6 +328,11 @@
     			
 		</div >
 		</div>
+		<% 
+			
+			MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");%>
+			<%if(memberDTO != null){ %>
+			<%if(memberDTO.getKind().equals("T")){ %>
 		<div class="container-fluid">
 			<div class="row">
 			<div class="col-md-1">
@@ -333,6 +340,8 @@
 			</div>
 			</div>
 		</div>
+		<%} %>
+		<%} %>
 
 </div>
 
