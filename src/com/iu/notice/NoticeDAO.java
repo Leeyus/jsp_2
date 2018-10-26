@@ -100,7 +100,7 @@ public class NoticeDAO {
 		}
 	
 	
-	public ArrayList<NoticeDTO> noticeList(int StartRow, int lastRow, String kind, String search) throws Exception{
+	public ArrayList<NoticeDTO> noticeList(int startRow, int lastRow, String kind, String search) throws Exception{
 		Connection con = DBConnector.getConnect();
 		String sql = "select * from "
 				+ "(select rownum R, N.* from "
@@ -110,7 +110,7 @@ public class NoticeDAO {
 				+ "where R between ? and ?";
 		PreparedStatement st = con.prepareStatement(sql);
 		st.setString(1, "%"+search+"%");
-		st.setInt(2, StartRow);
+		st.setInt(2, startRow);
 		st.setInt(3, lastRow);
 		ResultSet rs = st.executeQuery();
 		ArrayList<NoticeDTO>noticeDTO = new ArrayList<>();

@@ -2,13 +2,16 @@
 <%@page import="com.iu.notice.NoticeDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <jsp:useBean id="noticeDTO" class="com.iu.notice.NoticeDTO" scope="page"></jsp:useBean>
+    <jsp:setProperty property="*" name="noticeDTO"/>
+    
     <%
     NoticeDAO no = new NoticeDAO();
-    NoticeDTO noticeDTO = new NoticeDTO();
+    //NoticeDTO noticeDTO = new NoticeDTO();
     String n = "Fill";
-    noticeDTO.setTitle(request.getParameter("title"));
-    noticeDTO.setWriter(request.getParameter("writer"));
-    noticeDTO.setContents(request.getParameter("contents"));
+    //noticeDTO.setTitle(request.getParameter("title"));
+    //noticeDTO.setWriter(request.getParameter("writer"));
+    //noticeDTO.setContents(request.getParameter("contents"));
     
     int result = no.noticeWriteForm(noticeDTO);
     
@@ -16,7 +19,7 @@
     	n= "success";
     }
     request.setAttribute("message", n);
-    request.setAttribute("path", "./noticeList.jsp?curPage=1");
+    request.setAttribute("path", "./noticeList.jsp?surPage=1");
     
    /*  RequestDispatcher view = request.getRequestDispatcher("../common/result.jsp");
     view.forward(request, response); */

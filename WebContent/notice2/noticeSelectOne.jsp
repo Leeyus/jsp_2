@@ -6,10 +6,15 @@
     <%	NoticeDAO no = new NoticeDAO();
     	int num = Integer.parseInt(request.getParameter("num"));
     	NoticeDTO noticeDTO=no.noticeSelectOne(num);
+    	request.setAttribute("dto", noticeDTO);
+    	
     	
     	MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
-    	
     %>
+    <jsp:useBean id="dto" scope="request" class="com.iu.notice.NoticeDTO"></jsp:useBean>
+    <jsp:getProperty property="title" name="dto"/>
+    
+    
 <!DOCTYPE html>
 <html>
 <head>

@@ -1,34 +1,9 @@
-<%@page import="com.iu.member.MemberDTO"%>
-<%@page import="com.iu.member.MemberDAO"%>
-<%@page import="com.iu.notice.NoticeDTO"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="com.iu.notice.NoticeDAO"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    
-    <%-- <%
-   		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
-    %> --%>
-    <jsp:useBean id="member" scope="session" class="com.iu.member.MemberDTO"></jsp:useBean>
-    <jsp:getProperty property="name" name="member"/>
-    
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <!-- Theme Made By www.w3schools.com - No Copyright -->
-  <title>Bootstrap Theme Company Page</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <style>
-  body {
+@charset "UTF-8";
+body {
       font: 400 15px Lato, sans-serif;
       line-height: 1.8;
       color: #818181;
+      background-image: url("../../../../../../");
   }
   h2 {
       font-size: 24px;
@@ -202,69 +177,3 @@
         font-size: 150px;
     }
   }
-  </style>
-</head>
-<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
-
-<nav class="navbar navbar-default navbar-fixed-top">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>                        
-      </button>
-      <a class="navbar-brand" href="#myPage">Logo</a>
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="./notice/noticeList.jsp">NOTICE</a></li>
-        <li><a href="#services">SERVICES</a></li>
-        <li><a href="#portfolio">PORTFOLIO</a></li>
-        <li><a href="#pricing">PRICING</a></li>
-        <li><a href="#contact">CONTACT</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
-
-<div class="container-fluid">
-		<div class="row">
-			<!-- id, name, email, kind, classmate -->
-			<table class="table table-striped">
-				<tr>
-					<td>ID</td><td><%=memberDTO.getId() %></td>
-				</tr>
-				<tr>
-					<td>NAME</td><td><%=memberDTO.getName() %></td>
-				</tr>
-				<tr>
-					<td>Email</td><td><%=memberDTO.getEmail() %></td>
-				</tr>
-				<tr>
-					<td>Kind</td>
-					<td>
-					<%if(memberDTO.getKind().equals("T")){%>
-						Teacher
-					<%}else{ %>
-						Student
-					<%} %>	
-					</td>
-				</tr>
-				<tr>
-					<td>ClassMate</td><td><%=memberDTO.getClassMate() %></td>
-				</tr>
-			
-			</table>
-			
-		</div>
-		<div class="row">
-			<a href="memberUpdate.jsp">Update</a>
-			<a href="memberDelete.jsp">Delete</a>
-		</div>
-
-</div>
-
-
-</body>
-</html>

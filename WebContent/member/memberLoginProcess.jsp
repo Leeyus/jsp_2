@@ -21,7 +21,7 @@
     	} 
     	
 		MemberDAO memberDAO = new MemberDAO();    
-		memberDTO = memberDAO.selectOne(memberDTO);
+		memberDTO = memberDAO.selectOne(memberDTO);//로그인성공한지알수있는 코드
 		String result="Login Fail";
 		String path= "./memberLogin.jsp";
 		if(memberDTO != null){
